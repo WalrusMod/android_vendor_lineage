@@ -1,3 +1,11 @@
-on post-fs-data
+on property:persist.sshd.enable=1
     mkdir /data/ssh 0750 root shell
     mkdir /data/ssh/empty 0600 root shell
+    start sshd
+
+on property:persist.sshd.enable=0
+    stop sshd
+
+service sshd /system/bin/start-ssh
+    user root
+    disabled
